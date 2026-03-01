@@ -1,4 +1,4 @@
-name: Horizon Daily Summary
+name: Daily Horizon Summary
 
 on:
 workflow_dispatch:
