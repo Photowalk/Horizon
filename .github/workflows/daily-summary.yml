@@ -1,45 +1,45 @@
 name: Daily Summary
 
 on:
-workflow_dispatch:
-schedule:
-- cron: "0 23 * * *" # 北京时间每天 07:00（UTC 23:00）
+  workflow_dispatch:
+  schedule:
+    - cron: "0 23 * * *" # 北京时间每天 07:00（UTC 23:00）
 
 permissions:
-contents: write
+  contents: write
 
 jobs:
-run-horizon:
-runs-on: ubuntu-latest
-env:
-OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-RSSHUB_KEY: ${{ secrets.RSSHUB_KEY }}
-AI_PROVIDER: ${{ vars.AI_PROVIDER }}
-AI_MODEL: ${{ vars.AI_MODEL }}
-AI_BASE_URL: ${{ vars.AI_BASE_URL }}
+  run-horizon:
+    runs-on: ubuntu-latest
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      RSSHUB_KEY: ${{ secrets.RSSHUB_KEY }}
+      AI_PROVIDER: ${{ vars.AI_PROVIDER }}
+      AI_MODEL: ${{ vars.AI_MODEL }}
+      AI_BASE_URL: ${{ vars.AI_BASE_URL }}
 
-steps:
-- name: Checkout
-uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-- name: Install uv
-uses: astral-sh/setup-uv@v3
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
 
-- name: Set up Python
-uses: actions/setup-python@v5
-with:
-python-version: "3.11"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-- name: Install dependencies
-run: uv sync
+      - name: Install dependencies
+        run: uv sync
 
-- name: Run Horizon
-run: uv run horizon
+      - name: Run Horizon
+        run: uv run horizon
 
-- name: Commit generated summaries
-run: |
-git config user.name "github-actions[bot]"
-git config user.email "github-actions[bot]@users.noreply.github.com"
-git add data/summaries docs/_posts || true
-git diff --cached --quiet || git commit -m "chore: update daily summary"
-git push
+      - name: Commit generated summaries
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/summaries docs/_posts || true
+          git diff --cached --quiet || git commit -m "chore: update daily summary"
+          git push
