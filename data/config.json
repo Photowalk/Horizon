@@ -1,8 +1,8 @@
 {
   "version": "1.0",
   "ai": {
-"provider": "${AI_PROVIDER}",
-"model": "${AI_MODEL}",
+"provider": "openai",
+"model": "grok-4.1-fast",
 "base_url": "${AI_BASE_URL}",
 "api_key_env": "OPENAI_API_KEY",
 "temperature": 0.2,
