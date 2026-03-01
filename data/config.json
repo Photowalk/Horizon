@@ -1,13 +1,13 @@
 {
   "version": "1.0",
   "ai": {
-    "provider": "openai",
-    "model": "deepseek-chat",
-    "base_url": "https://api.deepseek.com",
-    "api_key_env": "OPENAI_API_KEY",
-    "temperature": 0.3,
-    "max_tokens": 8192,
-    "languages": ["zh", "en"]
+"provider": "${AI_PROVIDER}",
+"model": "${AI_MODEL}",
+"base_url": "${AI_BASE_URL}",
+"api_key_env": "OPENAI_API_KEY",
+"temperature": 0.2,
+"max_tokens": 4096,
+"languages": ["zh", "en"]
   },
   "sources": {
     "github": [
@@ -58,7 +58,13 @@
         "url": "https://lwn.net/headlines/full_text?key=${LWN_KEY}",
         "enabled": true,
         "category": "linux-kernel"
-      }
+      },
+{
+"name": "TechCrunch (AI filtered via RSSHub)",
+"url": "https://rsshub.lab.tg/techcrunch/news?filter=AI|Artificial%20Intelligence|Claude|GPT|deepseek|qwen|manus|deepseek|minimax|LLM|OpenAI&key=${RSSHUB_KEY}",
+"enabled": true,
+"category": "ai-news"
+}
     ],
     "reddit": {
       "enabled": true,
